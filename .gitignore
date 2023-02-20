@@ -22,3 +22,25 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#Api directories and files
+
+api/tmp/*
+
+api/.bundle
+api/db/*.sqlite3
+api/db/*.sqlite3-*
+api/log/*
+api/tmp/*
+api/log/.keep
+api/tmp/.keep
+api/tmp/pids/*
+api/tmp/pids/
+api/tmp/pids/.keep
+api/storage/*
+api/storage/.keep
+api/tmp/storage/*
+api/tmp/storage/
+api/tmp/storage/.keep
+api/config/master.key
+api/config/credentials.*
