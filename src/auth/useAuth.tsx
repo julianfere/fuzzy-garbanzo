@@ -10,7 +10,7 @@ const useAuth = () => {
 
   const { user, login, logout } = context;
 
-  const isAuthenticated = !!user;
+  const isAuthenticated = !!sessionStorage.getItem("token");
 
   return { user, login, logout, isAuthenticated };
 };

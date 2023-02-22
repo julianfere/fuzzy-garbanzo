@@ -1,9 +1,9 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 import logo from "../../assets/login-logo.svg";
-import "./login.css";
 import { useCallback } from "react";
 import { LoginData } from "../../auth/types";
+import "./login.css";
 
 const handleSubmit = (
   e: React.FormEvent<HTMLFormElement>,

@@ -1,7 +1,6 @@
 type User = {
   name: string;
   email: string;
-  birthDate: string;
 };
 
 type LoginData = {
@@ -15,4 +14,9 @@ type AuthContextType = {
   logout: () => void;
 };
 
-export type { AuthContextType, User, LoginData };
+type DecodedToken = {
+  exp: number;
+  user: User;
+};
+
+export type { AuthContextType, User, LoginData, DecodedToken };
