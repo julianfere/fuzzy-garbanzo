@@ -44,3 +44,4 @@ api/tmp/storage/
 api/tmp/storage/.keep
 api/config/master.key
 api/config/credentials.*
+api/.byebug_history
