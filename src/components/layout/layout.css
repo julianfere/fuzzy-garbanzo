@@ -1,0 +1,38 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 1rem 0rem;
+  background: #0090AF;
+  color: #fff;
+}
+
+.second {
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.first > img {
+  cursor: pointer;
+}
+
+.username {
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  cursor: pointer;
+}

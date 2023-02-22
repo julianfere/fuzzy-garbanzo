@@ -9,7 +9,7 @@ type LoginData = {
 };
 
 type AuthContextType = {
-  user: User | null;
+  getCurrentUser: () => User | null;
   login: (data: LoginData, callback: VoidFunction) => Promise<void>;
   logout: () => void;
 };

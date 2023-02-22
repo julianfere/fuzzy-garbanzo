@@ -8,11 +8,11 @@ const useAuth = () => {
     throw new Error("useAuth must be used within an AuthProvider");
   }
 
-  const { user, login, logout } = context;
+  const { getCurrentUser, login, logout } = context;
 
   const isAuthenticated = !!sessionStorage.getItem("token");
 
-  return { user, login, logout, isAuthenticated };
+  return { getCurrentUser, login, logout, isAuthenticated };
 };
 
 export { useAuth };

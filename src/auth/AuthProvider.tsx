@@ -6,8 +6,6 @@ import { BASE_URL } from "../utils/constants";
 const authContext = createContext<AuthContextType>({} as AuthContextType);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
   const login = async (data: LoginData, callback: VoidFunction) => {
     try {
       const authResponse = await fetch(`${BASE_URL}/login`, {
@@ -27,18 +25,28 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         name: decodedToken.user.name,
       };
 
-      setUser(user);
       callback();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const logout = () => {
-    setUser(null);
+  const getCurrentUser = () => {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      const decodedToken: DecodedToken = jwt_decode(token);
+      const user: User = {
+        email: decodedToken.user.email,
+        name: decodedToken.user.name,
+      };
+      return user;
+    }
+    return null;
   };
 
-  const value = { user, login, logout };
+  const logout = () => {};
+
+  const value = { getCurrentUser, login, logout };
 
   return (
     <authContext.Provider value={value}> {children} </authContext.Provider>
