@@ -10,13 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_22_161052) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_010604) do
+  create_table "students", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "lastname", null: false
+    t.date "birthdate", null: false
+    t.string "address"
+    t.integer "school_grade", default: 0
+    t.boolean "active_student", default: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0
+    t.boolean "active", default: true
   end
 
+  add_foreign_key "students", "users"
 end

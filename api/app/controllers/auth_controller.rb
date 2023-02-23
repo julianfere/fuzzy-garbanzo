@@ -3,7 +3,7 @@ class AuthController < ApplicationController
     @user = User.find_by_email(login_params[:email])
 
     if @user&.authenticate(login_params[:password])
-      token = JsonWebToken.encode(user: {name: @user.name, email: @user.email})
+      token = JsonWebToken.encode(user: user_to_encode)
       time = Time.now + 12.hours.to_i
 
       render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M") }, status: :ok
@@ -13,6 +13,10 @@ class AuthController < ApplicationController
   end
 
   private 
+
+  def user_to_encode
+    { name: @user.name, email: @user.email, id: @user.id, role: @user.role }
+  end
   
   def login_params
     params.permit(:email, :password)

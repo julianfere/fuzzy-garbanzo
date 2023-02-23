@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :unauthorized
   attr_reader :current_user
 
   def index
@@ -11,11 +13,17 @@ class ApplicationController < ActionController::API
 
     begin
       @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
+      @current_user = User.find(@decoded[:user][:id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  private
+
+  def unauthorized
+    render json: { error: 'Not Authorized' }, status: :unauthorized
   end
 end
