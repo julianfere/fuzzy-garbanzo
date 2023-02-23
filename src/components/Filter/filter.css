@@ -1,0 +1,20 @@
+.filter-container {
+  position: relative;
+}
+
+.filter {
+  width: 100%;
+  height: 100%;
+  padding: 0.3rem 0.5rem 0.3rem 1rem;; 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding-right: 10px;
+}

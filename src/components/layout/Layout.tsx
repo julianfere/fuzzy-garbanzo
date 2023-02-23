@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { useAuth } from "../../auth/useAuth";
+import { QueryClient, QueryClientProvider } from "react-query";
 import home from "../../assets/home.svg";
 import menu from "../../assets/menu.svg";
-import { useAuth } from "../../auth/useAuth";
 import "./layout.css";
 
 export const Layout = () => {
   const { getCurrentUser } = useAuth();
   const currentUser = useMemo(() => getCurrentUser(), [getCurrentUser]);
+  const queryClient = new QueryClient();
 
   return (
     <>
@@ -18,13 +20,17 @@ export const Layout = () => {
         <section className="second">
           <NavLink
             to="/home"
-            className={({ isActive }) => `${isActive ? "active" : ""} nav-link`}
+            className={({ isActive }) =>
+              `${isActive ? "active-link" : ""} nav-link`
+            }
           >
             <img src={home} alt="home" />
           </NavLink>
           <NavLink
             to="/students"
-            className={({ isActive }) => `${isActive ? "active" : ""} nav-link`}
+            className={({ isActive }) =>
+              `${isActive ? "active-link" : ""} nav-link`
+            }
           >
             Estudiantes
           </NavLink>
@@ -33,7 +39,9 @@ export const Layout = () => {
           <p className="username">{currentUser?.name}</p>
         </section>
       </nav>
-      <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
     </>
   );
 };

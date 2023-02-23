@@ -1,0 +1,48 @@
+.table-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0090AF;
+}
+
+.table-header:first-child, .table-data:first-child {
+  padding: 1rem;
+  text-align: left;
+}
+
+.student-table {
+  margin-top: 1rem;
+  width: 100%;
+  border-collapse:separate;
+  border-spacing:0 0;
+}
+
+.table-data {
+  text-align: center;
+  padding: 0.5rem 0rem 0.5rem 0rem;
+  border-style:solid none;
+  border-width:1px;
+  border-color: #cccccc;
+}
+
+.table-data:first-child {
+  border-left-style:solid;
+  border-top-left-radius:11px;
+  border-bottom-left-radius:11px;
+}
+
+.table-data:nth-last-child(2) {
+  border-right-style:solid;
+  border-bottom-right-radius:11px;
+  border-top-right-radius:11px;
+  width: 30%;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.delete {
+  padding-left: 1rem;
+}
+
+.delete > img {
+  cursor: pointer;
+}
