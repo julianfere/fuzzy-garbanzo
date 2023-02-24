@@ -6,12 +6,14 @@ class StudentsController < ApplicationController
     @students = StudentFilter.new(Student.all, filter_params).call
     authorize @students
 
-    render json: @students
+    students_serialized = StudentSerializer.render_as_hash(@students)
+    byebug
+    render_json students_serialized, :ok
   end
 
   def show
     authorize @student
-    render json: @student
+    render_json StudentSerializer.render_as_hash(@student), :ok
   end
 
   def create
@@ -19,18 +21,18 @@ class StudentsController < ApplicationController
     authorize @student
 
     if @student.save
-      render json: @student, status: :created, location: @student
+      render_json StudentSerializer.render_as_hash(@student), :created
     else
-      render json: @student.errors, status: :unprocessable_entity
+      render_json @student.errors, :unprocessable_entity
     end
   end
 
   def update
     authorize @student
     if @student.update(student_params)
-      render json: @student
+      render_json StudentSerializer.render_as_hash(@student), :ok
     else
-      render json: @student.errors, status: :unprocessable_entity
+      render_json @student.errors, :unprocessable_entity
     end
   end
 

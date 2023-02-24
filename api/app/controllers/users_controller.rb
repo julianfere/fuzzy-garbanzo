@@ -6,12 +6,14 @@ class UsersController < ApplicationController
     @users = UserFilter.new(policy_scope(User), filter_params).call
     authorize @users
 
-    render json: @users.map { |user| user.as_json(except: [:password_digest]) }
+    serialized_users = UserSerializer.render_as_hash(@users)
+
+    render_json serialized_users, :ok
   end
 
   def show
     authorize @user
-    render json: @user
+    render_json UserSerializer.render_as_hash(@user), :ok
   end
 
   def toggle
@@ -20,9 +22,9 @@ class UsersController < ApplicationController
     @user.toggle(:active)
 
     if @user.save
-      render json: @user, status: :ok
+    render_json UserSerializer.render_as_hash(@user), :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render_json @user.errors, :unprocessable_entity
     end
   end
 
@@ -31,18 +33,18 @@ class UsersController < ApplicationController
     authorize @user
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render_json UserSerializer.render(@user), :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render_json @user.errors, :unprocessable_entity
     end
   end
 
   def update
     authorize @user
     if @user.update(user_params)
-      render json: @user
+      render_json UserSerializer.render(@user), :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render_json @user.errors, :unprocessable_entity
     end
   end
 
